@@ -28,7 +28,8 @@
 				margin-left: auto;
 				margin-right: auto;
 				padding: 0 2em;
-            }
+			}
+			
             
 		</style>
 	</head>
@@ -113,7 +114,7 @@
 
 			function createGUI( model, animations ) {
 
-				const states = ['Walking' ];
+				const states = [ 'Idle', 'Walking', 'Running', 'Dance', 'Death', 'Sitting', 'Standing' ];
 				const emotes = [ 'Jump', 'Yes', 'No', 'Wave', 'Punch', 'ThumbsUp' ];
 
 
@@ -135,12 +136,55 @@
 					}
 
 				}
-				activeAction = actions[ 'Walking' ];
+				activeAction = actions[ 'Walking'];
 				activeAction.play();
 
 
 
 			}
+			document.getElementById("jumpRobo").onclick = function(){
+				activeAction = actions[ 'Jump'];
+				activeAction.play();
+				setTimeout(() => {
+					activeAction = actions[ 'Jump'];
+				activeAction.play();
+
+				}, 3000);
+			}
+				// emotes
+
+				const emoteFolder = gui.addFolder( 'Emotes' );
+
+				function createEmoteCallback( name ) {
+
+					api[ name ] = function () {
+
+						fadeToAction( name, 0.2 );
+
+						mixer.addEventListener( 'finished', restoreState );
+
+					};
+
+					emoteFolder.add( api, name );
+
+				}
+
+				function restoreState() {
+
+					mixer.removeEventListener( 'finished', restoreState );
+
+					fadeToAction( api.state, 0.2 );
+
+				}
+
+				for ( let i = 0; i < emotes.length; i ++ ) {
+
+					createEmoteCallback( emotes[ i ] );
+
+				}
+
+				emoteFolder.open();
+
 
 			function fadeToAction( name, duration ) {
 

@@ -246,6 +246,7 @@ startGame = () => {
 resultContinue.onclick = ()=>{
   result.style.display = "none";
   question_container.style.display = "block";
+  getNewQuestion();
 }
 
 getNewQuestion = () => {
@@ -262,7 +263,8 @@ getNewQuestion = () => {
   const questionIndex = questionCounter - 1;
   //Math.floor(Math.random() * availableQuesions.length);
   currentQuestion = availableQuesions[questionIndex];
-
+  speak(currentQuestion.question_context);
+  speak(currentQuestion.question_text);
   question.innerText = currentQuestion.question_text;
   question_context.innerText = currentQuestion.question_context;
 
@@ -308,8 +310,10 @@ choices.forEach(choice => {
         result.style.display = "block";
        question_container.style.display = "none";
        result.querySelector("h3").innerText = option_details.option_result.result_text;
+      }else{
+        getNewQuestion();
       }
-      getNewQuestion();
+      
       
     }, 1000);
   });
@@ -319,5 +323,11 @@ incrementScore = num => {
   score += parseInt(num);
   scoreText.innerText ='Rs '+ score;
 };
+
+speak=(message)=>{
+  var msg = new SpeechSynthesisUtterance(message);
+window.speechSynthesis.speak(msg);
+}
+
 
 startGame();
