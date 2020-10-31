@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - skinning and morphing</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<!-- <link type="text/css" rel="stylesheet" href="main.css"> -->
+		<style>
+			body {
+				color: #222;
+			}
+
+			a {
+				color: #2fa1d6;
+			}
+
+			p {
+				max-width: 600px;
+				margin-left: auto;
+				margin-right: auto;
+				padding: 0 2em;
+            }
+            
+		</style>
+	</head>
+
+	<body>
+		
+
+		<script type="module">
+
+			import * as THREE from 'https://unpkg.com/three@0.122.0/build/three.module.js';
+
+			import Stats from 'https://unpkg.com/three@0.122.0/examples/jsm/libs/stats.module.js';
+			import { GUI } from 'https://unpkg.com/three@0.122.0/examples/jsm/libs/dat.gui.module.js';
+
+			import { GLTFLoader } from 'https://unpkg.com/three@0.122.0/examples/jsm/loaders/GLTFLoader.js';
+
+			let container, stats, clock, gui, mixer, actions, activeAction, previousAction;
+			let camera, scene, renderer, model, face;
+
+			const api = { state: 'Walking' };
+
+			init();
+			animate();
+
+			function init() {
+
+				container = document.createElement( 'div' );
+                document.body.appendChild( container );
+                container.style.marginTop="300px";
+
+				camera = new THREE.PerspectiveCamera( 25, window.innerWidth / window.innerHeight, 1, 100 );
+				camera.position.set( - 5, 3, 10 );
+				camera.lookAt( new THREE.Vector3( 0, 2, 0 ) );
+
+				scene = new THREE.Scene();
+				scene.background = new THREE.Color(0xECF5FF);
+				
+
+				clock = new THREE.Clock();
+
+				// lights
+
+				const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
+				hemiLight.position.set( 0, 20, 0 );
+				scene.add( hemiLight );
+
+				const dirLight = new THREE.DirectionalLight( 0xffffff );
+				dirLight.position.set( 0, 20, 10 );
+				scene.add( dirLight );
+
+				
+
+				// model
+
+				const loader = new GLTFLoader();
+				loader.load( 'RobotExpressive.glb', function ( gltf ) {
+
+					model = gltf.scene;
+					scene.add( model );
+
+					createGUI( model, gltf.animations );
+
+				}, undefined, function ( e ) {
+
+					console.error( e );
+
+				} );
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth-1000, window.innerHeight-400 );
+				renderer.outputEncoding = THREE.sRGBEncoding;
+				container.appendChild( renderer.domElement );
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+				// stats
+				stats = new Stats();
+				container.appendChild( stats.dom );
+
+			}
+
+			function createGUI( model, animations ) {
+
+				const states = ['Walking' ];
+				const emotes = [ 'Jump', 'Yes', 'No', 'Wave', 'Punch', 'ThumbsUp' ];
+
+				gui = new GUI();
+
+				mixer = new THREE.AnimationMixer( model );
+
+				actions = {};
+
+				for ( let i = 0; i < animations.length; i ++ ) {
+
+					const clip = animations[ i ];
+					const action = mixer.clipAction( clip );
+					actions[ clip.name ] = action;
+
+					if ( emotes.indexOf( clip.name ) >= 0 || states.indexOf( clip.name ) >= 4 ) {
+
+						action.clampWhenFinished = true;
+						action.loop = THREE.LoopOnce;
+
+					}
+
+				}
+				activeAction = actions[ 'Walking' ];
+				activeAction.play();
+
+
+
+			}
+
+			function fadeToAction( name, duration ) {
+
+				previousAction = activeAction;
+				activeAction = actions[ name ];
+
+				if ( previousAction !== activeAction ) {
+
+					previousAction.fadeOut( duration );
+
+				}
+
+				activeAction
+					.reset()
+					.setEffectiveTimeScale( 1 )
+					.setEffectiveWeight( 1 )
+					.fadeIn( duration )
+					.play();
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+
+			}
+
+
+
+			function animate() {
+
+				const dt = clock.getDelta();
+
+				if ( mixer ) mixer.update( dt );
+
+				requestAnimationFrame( animate );
+
+				renderer.render( scene, camera );
+
+				stats.update();
+
+			}
+
+		</script>
+
+	</body>
+</html>
