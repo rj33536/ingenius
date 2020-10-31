@@ -19,14 +19,15 @@
 				margin-left: auto;
 				margin-right: auto;
 				padding: 0 2em;
-            }
+			}
+			
             
 		</style>
 	</head>
 
 	<body>
 		
-
+		<button id="jumpRobo">Jump</button>		
 		<script type="module">
 
 			import * as THREE from 'https://unpkg.com/three@0.122.0/build/three.module.js';
@@ -48,7 +49,8 @@
 
 				container = document.createElement( 'div' );
                 document.body.appendChild( container );
-                container.style.marginTop="300px";
+				container.style.marginTop="300px";
+			
 
 				camera = new THREE.PerspectiveCamera( 25, window.innerWidth / window.innerHeight, 1, 100 );
 				camera.position.set( - 5, 3, 10 );
@@ -90,7 +92,7 @@
 
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( window.innerWidth-1000, window.innerHeight-400 );
+				renderer.setSize( window.innerWidth-800, window.innerHeight-200 );
 				renderer.outputEncoding = THREE.sRGBEncoding;
 				container.appendChild( renderer.domElement );
 
@@ -98,13 +100,13 @@
 
 				// stats
 				stats = new Stats();
-				container.appendChild( stats.dom );
+				//container.appendChild( stats.dom );
 
 			}
 
 			function createGUI( model, animations ) {
 
-				const states = ['Walking' ];
+				const states = [ 'Idle', 'Walking', 'Running', 'Dance', 'Death', 'Sitting', 'Standing' ];
 				const emotes = [ 'Jump', 'Yes', 'No', 'Wave', 'Punch', 'ThumbsUp' ];
 
 				gui = new GUI();
@@ -127,12 +129,55 @@
 					}
 
 				}
-				activeAction = actions[ 'Walking' ];
+				activeAction = actions[ 'Walking'];
 				activeAction.play();
 
 
 
 			}
+			document.getElementById("jumpRobo").onclick = function(){
+				activeAction = actions[ 'Jump'];
+				activeAction.play();
+				setTimeout(() => {
+					activeAction = actions[ 'Jump'];
+				activeAction.play();
+
+				}, 3000);
+			}
+				// emotes
+
+				const emoteFolder = gui.addFolder( 'Emotes' );
+
+				function createEmoteCallback( name ) {
+
+					api[ name ] = function () {
+
+						fadeToAction( name, 0.2 );
+
+						mixer.addEventListener( 'finished', restoreState );
+
+					};
+
+					emoteFolder.add( api, name );
+
+				}
+
+				function restoreState() {
+
+					mixer.removeEventListener( 'finished', restoreState );
+
+					fadeToAction( api.state, 0.2 );
+
+				}
+
+				for ( let i = 0; i < emotes.length; i ++ ) {
+
+					createEmoteCallback( emotes[ i ] );
+
+				}
+
+				emoteFolder.open();
+
 
 			function fadeToAction( name, duration ) {
 
