@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>three.js webgl - skinning and morphing</title>
+		<title>Finance Literacy</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<!-- <link type="text/css" rel="stylesheet" href="main.css"> -->
+        <!-- <link type="text/css" rel="stylesheet" href="main.css"> -->
+        <link rel="stylesheet" href="app.css" />
 		<style>
 			body {
-				color: #222;
+				background-color:#ECF5FF;
 			}
-
+            h1{
+                color:#56a5eb;
+                text-align: center;
+                text-transform: uppercase;
+                font-size: 50px;
+            }
 			a {
-				color: #2fa1d6;
+                color: #2fa1d6;
+                text-align: center;
+                margin: auto;
+                
 			}
 
 			p {
@@ -25,8 +34,11 @@
 	</head>
 
 	<body>
-		
-
+        <div class="flex-center flex-column">
+        <h1>Spent Wise</h1>
+        
+        <a class="btn" href="index1.html">Play</a>
+        </div>
 		<script type="module">
 
 			import * as THREE from 'https://unpkg.com/three@0.122.0/build/three.module.js';
@@ -48,9 +60,9 @@
 
 				container = document.createElement( 'div' );
                 document.body.appendChild( container );
-                container.style.marginTop="300px";
+                container.style.marginTop="20px";
 
-				camera = new THREE.PerspectiveCamera( 25, window.innerWidth / window.innerHeight, 1, 100 );
+				camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 100 );
 				camera.position.set( - 5, 3, 10 );
 				camera.lookAt( new THREE.Vector3( 0, 2, 0 ) );
 
@@ -90,15 +102,12 @@
 
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( window.innerWidth-1000, window.innerHeight-400 );
+				renderer.setSize( window.innerWidth, window.innerHeight);
 				renderer.outputEncoding = THREE.sRGBEncoding;
 				container.appendChild( renderer.domElement );
 
 				window.addEventListener( 'resize', onWindowResize, false );
 
-				// stats
-				stats = new Stats();
-				container.appendChild( stats.dom );
 
 			}
 
@@ -107,7 +116,6 @@
 				const states = ['Walking' ];
 				const emotes = [ 'Jump', 'Yes', 'No', 'Wave', 'Punch', 'ThumbsUp' ];
 
-				gui = new GUI();
 
 				mixer = new THREE.AnimationMixer( model );
 
