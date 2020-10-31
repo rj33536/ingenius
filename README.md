@@ -5,7 +5,7 @@ We are going through an era of education where education is not optional for any
 
 We have build a game to teach kids the same. In this game, kids will have the choice of choosing one of several career paths and they will have to survive with the given job for a month. Each career path has its own pros and cons. If the kid survived in the game for a month they win!!!
 
-!![alt text](https://github.com/[rj33536]/[ingenius]/blob/[master]/robo.PNG?raw=true)
-!![alt text](https://github.com/[rj33536]/[ingenius]/blob/[master]/quiz.png?raw=true)
-!![alt text](https://github.com/[rj33536]/[ingenius]/blob/[master]/quiz2.png?raw=true)
-!![alt text](https://github.com/[rj33536]/[ingenius]/blob/[master]/role.png?raw=true)
+!![alt text](https://github.com/rj33536/ingenius/blob/master/robot.PNG?raw=true)
+!![alt text](https://github.com/rj33536/ingenius/blob/master/role.png?raw=true)
+!![alt text](https://github.com/rj33536/ingenius/blob/master/quiz.png?raw=true)
+!![alt text](https://github.com/rj33536/ingenius/blob/master/quiz2.png?raw=true)
