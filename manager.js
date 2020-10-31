@@ -17,7 +17,7 @@ let availableQuesions = [];
 let questions = [
   {
     "id": "1",
-    "question_context": "A little exercise goes a long way, both for keeping you healthy and relieving stress. You need to start a regular fitness regimen.",
+    "question_context": " You are growing elder and expect to face medical problems soon ,You can buy a medical insurance",
     "question_text": "WHAT DO YOU WANT TO DO?",
     "options": [
       {
@@ -25,17 +25,32 @@ let questions = [
         "option_credit": "0",
         "option_debit": "0",
         "option_liability": "0",
+        "option_result": {
+          "result_text": "You should be Serious about your health,Medical bills can cause serious debts in ones lifes",
+          "result_credit": "0",
+          "result_debit": "0",
+          "result_liability": "0"
+        }
+      },
+      {
+        "option_text": "Pay for medical insurance by looking at policybazar.com ",
+        "option_credit": "0",
+        "option_debit": "550",
+        "option_liability": "0",
         "option_result": null
       },
       {
-        "option_text": "Join a gym",
+        "option_text": "Go to a Medical insurance Agent ",
         "option_credit": "0",
-        "option_debit": "500",
+        "option_debit": "1100",
         "option_liability": "0",
         "option_result": null
       }
     ]
   },
+
+
+
   {
     "id": "2",
     "question_context": "You’ve been working for several hours, and you’re starving. But you forgot your lunch.",
@@ -44,10 +59,10 @@ let questions = [
       {
         "option_text": "BUY A SALAD",
         "option_credit": "0",
-        "option_debit": "20",
+        "option_debit": "200",
         "option_liability": "0",
         "option_result": {
-          "result_text": "It may be bad for you, but it sure is cheap. Perhaps that’s why low-income workers like you are more likely to be overweight.",
+          "result_text": " Healthy eating habits costs more .Try to take lunch with you always to save some money.",
           "result_credit": "0",
           "result_debit": "0",
           "result_liability": "0"
@@ -56,7 +71,7 @@ let questions = [
       {
         "option_text": "BUY A BURGER",
         "option_credit": "0",
-        "option_debit": "10",
+        "option_debit": "100",
         "option_liability": "0",
         "option_result": {
           "result_text": "It may be bad for you, but it sure is cheap. Perhaps that’s why low-income workers like you are more likely to be overweight.",
@@ -67,39 +82,57 @@ let questions = [
       }
     ]
   },
+
+
+
   {
     "id": "3",
-    "question_context": "You’re walking down the street when you see someone drop a $10 bill.",
+    "question_context": "You’re Maid wants to increase her pay or else she will not work anymore",
     "question_text": "WHAT DO YOU WANT TO DO?",
     "options": [
       {
-        "option_text": "GIVE IT TO THEM",
+        "option_text": "Increase the salary",
         "option_credit": "0",
-        "option_debit": "0",
+        "option_debit": "1000",
         "option_liability": "0",
         "option_result": null
       },
       {
-        "option_text": "POCKET THE Rs.50",
-        "option_credit": "50",
+        "option_text": "Search for new Maid",
+        "option_credit": "0",
         "option_debit": "0",
         "option_liability": "0",
         "option_result": null
       }
     ]
   },
+
+
+
   {
     "id": "4",
-    "question_context": "You come out of your house to discover that someone has siphoned the gas from your car. And you’re already running late for work.",
+    "question_context": "You Got a email from BSES about electricity bill of this month. If not paid You will be out of electricity soon ",
     "question_text": "WHAT DO YOU WANT TO DO?",
     "options": [
       {
-        "option_text": "Say no",
+        "option_text": "Ignore",
         "option_credit": "0",
         "option_debit": "0",
         "option_liability": "0",
         "option_result": {
-          "result_text": "More that 76% people can't fulfill their kid's wishes just because of money. But that $10 will make a difference",
+          "result_text": " Paying for Water, Gas,Electricity bills takes major chunks of salaries but you are not allowed to ignore these . ",
+          "result_credit": "0",
+          "result_debit": "0",
+          "result_liability": "0"
+        }
+      },
+      {
+        "option_text": "Pay Bill",
+        "option_credit": "0",
+        "option_debit": "1240",
+        "option_liability": "0",
+        "option_result": {
+          "result_text": " Paying for Water, Gas,Electricity bills takes major chunks of salaries but you are not allowed to ignore these . ",
           "result_credit": "0",
           "result_debit": "0",
           "result_liability": "0"
@@ -107,8 +140,11 @@ let questions = [
       }
     ]
   },
+
+
+
   {
-    "id": "4",
+    "id": "5",
     "question_context": "Your son saw an icecream truck and ran for it.",
     "question_text": "WHAT DO YOU WANT TO DO?",
     "options": [
@@ -185,7 +221,7 @@ let questions = [
   },
   {
     "id": "8",
-    "question_context": "Your son saw an icecream truck and ran for it.",
+    "question_context": "Your son saw a Cool toy and ran for it.",
     "question_text": "WHAT DO YOU WANT TO DO?",
     "options": [
       {
@@ -194,7 +230,19 @@ let questions = [
         "option_debit": "0",
         "option_liability": "0",
         "option_result": {
-          "result_text": "More that 76% people can't fulfill their kid's wishes just because of money. But that $10 will make a difference",
+          "result_text": "More that 76% people can't fulfill their kid's wishes just because of money. But that 660 Rs will make a difference",
+          "result_credit": "0",
+          "result_debit": "0",
+          "result_liability": "0"
+        }
+      },
+      {
+        "option_text": "Buy Toy",
+        "option_credit": "0",
+        "option_debit": "660",
+        "option_liability": "0",
+        "option_result": {
+          "result_text": "You could buy somthing useful for him and teach him not to waste money on stupid stuff from early age",
           "result_credit": "0",
           "result_debit": "0",
           "result_liability": "0"
@@ -205,40 +253,12 @@ let questions = [
 
 ];
 
-// let questions = [
-//   {
-//     question: "Pay rent",
-//     choice1: "Rs 8000",
-//     choice2: "pay half and say u will pay half later",
-//     choice3: "pack stuff and leave home",
-
-//     answer: 1
-//   },
-//   {
-//     question: "Buy Groceries",
-//     choice1: "1500",
-//     choice2: "700",
-//     choice3: "340",
-
-//     answer: 3
-//   },
-//   {
-//     question: "pay EMI of Bike",
-//     choice1: "IGNORE",
-//     choice2: "pay Rs 3050",
-//     choice3: "get help from friends",
-
-//     answer: 4
-//   }
-// ];
-
-//CONSTANTS
-const CORRECT_BONUS = 10;
+const CORRECT_BONUS = 0;
 const MAX_QUESTIONS = 30;
 
 startGame = () => {
   questionCounter = 0;
-  score = 20000;
+  score = 5000;
   availableQuesions = questions;
   getNewQuestion();
 };
